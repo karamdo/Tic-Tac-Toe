@@ -2,4 +2,4 @@
 
 basic js project
 
-to play the game press the [link](\index.html)
+to play the game press the [link] (https://karamdo.github.io/Tic-Tac-Toe/)
