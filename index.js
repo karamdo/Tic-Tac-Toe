@@ -1,21 +1,26 @@
 let toPlay = "X";
 let winner = "";
 let cnt = 0;
+let end = false;
 
 const dodis = (id) => {
   let x = document.getElementById(id);
+  if (end || x.textContent !== "") return;
   cnt++;
-  if (x.textContent !== "") return;
   x.textContent = toPlay;
   calc();
   toPlay = toPlay === "X" ? "O" : "X";
   if (!winner) {
     if (cnt === 9) {
+      end = true;
       draw();
     } else {
       document.getElementById("top").textContent = `${toPlay} to play`;
     }
-  } else document.getElementById("top").textContent = `press ↑ to reset`;
+  } else {
+    document.getElementById("top").textContent = `press ↑ to reset`;
+    end = true;
+  }
 };
 
 const calc = () => {
@@ -71,6 +76,7 @@ const Clearr = () => {
   toPlay = "X";
   winner = "";
   cnt = 0;
+  end = false;
   document.getElementById("top").textContent = `${toPlay} to play`;
 };
 
