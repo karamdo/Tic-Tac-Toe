@@ -11,21 +11,23 @@ const dodis = (id) => {
   calc();
   toPlay = toPlay === "X" ? "O" : "X";
   if (!winner) {
-    if (cnt === 9) {
-      end = true;
-      draw();
-    } else {
+    if (cnt < 9) {
       document.getElementById("top").textContent = `${toPlay} to play`;
+      return;
+    } else {
+      end = true;
+      setTimeout(() => {
+        alert(`draw`);
+      }, 10);
     }
   } else {
-    document.getElementById("top").textContent = `press ↑ to reset`;
     end = true;
   }
+  document.getElementById("top").textContent = `press ↑ to reset`;
 };
 
 const calc = () => {
   const all = document.querySelectorAll("button");
-  // console.log(all[0].textContent);
   for (let i = 0; i < 9; i += 3) {
     if (
       all[i].textContent === all[i + 1].textContent &&
@@ -64,12 +66,13 @@ const calc = () => {
     }
   }
   if (winner) {
-    win(winner);
+    setTimeout(() => {
+      alert(`${winner} win the game`);
+    }, 10);
   }
 };
 
 const Clearr = () => {
-  // console.log("F");
   document
     .querySelectorAll("button")
     .forEach((event) => (event.textContent = ""));
@@ -78,13 +81,4 @@ const Clearr = () => {
   cnt = 0;
   end = false;
   document.getElementById("top").textContent = `${toPlay} to play`;
-};
-
-const win = (winner) => {
-  alert(`${winner} win the game`);
-};
-
-const draw = () => {
-  alert(`draw`);
-  document.getElementById("top").textContent = `press ↑ to reset`;
 };
